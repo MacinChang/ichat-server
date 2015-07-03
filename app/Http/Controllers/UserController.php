@@ -54,7 +54,9 @@ class UserController extends Controller {
 
 		$user = array('account' => $account, 'password' => $password, 'phone' => $phone, 'nickname' => $nick);
 		\DB::table('user') -> insert($user);
-		return $user;
+		echo '<pre>';
+    	print_r($user);
+    	echo '</pre>';
 	}
 
     public function getFindContact(Request $request){
