@@ -57,6 +57,7 @@ class UserController extends Controller {
 		echo '<pre>';
     	print_r($user);
     	echo '</pre>';
+    	return $user;
 	}
 
     public function getFindContact(Request $request){
