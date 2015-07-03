@@ -26,8 +26,8 @@ class UserController extends Controller {
     public function postLogin(Request $request)
     {
         $account = $request->input('account');
-		//$password = Hash::make(Input::get('password'));
-		$password = $request->input('password');
+		$password = Hash::make(Input::get('password'));
+		//$password = $request->input('password');
 		$res = \DB::table('user') -> where('account', $account) -> where('password', $password) -> get();
 		if($res == NULL){
 			return 'false';
@@ -66,8 +66,11 @@ class UserController extends Controller {
 		return $res;
 	}
 
-	
-	//public 	
+	public function postAddContact(Request $request){
+		$from = $request->input('from');
+		$to = $request->input('to');
+		$cache = array('from' => )
+	}
 
 
 }
