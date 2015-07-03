@@ -12,7 +12,10 @@ class UserController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function getLogin(Request $request)
+    public function getLogin(){
+    	return \View::make('login');
+    }
+    public function postLogin(Request $request)
     {
         $account = $request->input('account');
 		//$password = Hash::make(Input::get('password'));
@@ -26,11 +29,24 @@ class UserController extends Controller {
 		}
     }
     public function getRegister(){
-			return \View::make('register');
+		return \View::make('register');
+    	//return rand(1001, 100000);
     	//return 'register';
 	}
-	public function postRegister(){
-		return 'success';
+	public function postRegister(Request $request){
+		$nick = $request->input('nick');
+		$password = \Hash::make($request->input('password'));
+		$phone = $request->input('phone');
+		$account = rand(10001, 99999);
+		$res = \DB::table('user') -> where('account', $account) -> get();
+		while($res != NULL){
+			$account = rand(10001, 99999);
+			$res = \DB::table('user') -> where('account', $account) -> get();
+		}
+
+		$user = array('account' => $account, 'password' => $password, 'phone' => $phone);
+		\DB::table('user') -> insert($user);
+		return $user;
 	}
     public function anyFindContact(){
 			$account = Input::get('account');
