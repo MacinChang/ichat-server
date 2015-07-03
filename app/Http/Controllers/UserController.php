@@ -78,9 +78,17 @@ class UserController extends Controller {
 	public function postAddContact(Request $request){
 		$from = $request->input('from');
 		$to = $request->input('to');
-		$cache = array('from' => $from, 'to' => $to, 'time' => time());
-		\DB::table('cache_add_contact') -> insert($cache);
-		return $cache;
+		date_default_timezone_set('PRC');
+		$cache = array('from' => $from, 'to' => $to, 'time' => date('Y-m-d H:i:s', time()));
+		$res = \DB::table('cache_add_contact') -> where('from', $from) -> where('to', $to) -> first();
+		if($res == NULL){
+			\DB::table('cache_add_contact') -> insert($cache);	
+		}
+		else{
+			\DB::table('cache_add_contact') -> where('from', $from) -> where('to', $to) -> update($cache);
+		}
+		$res = \DB::table('cache_add_contact') -> where('from', $from) -> where('to', $to) -> get();
+		return $res;
 	}
 
 	//public function 
