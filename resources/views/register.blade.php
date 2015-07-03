@@ -37,9 +37,21 @@
     </head>
     <body>
         <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
+            <form action = "register" method = "post">
+                <div class = "nick_box">
+                     <label class = "item" for = "nick">昵称</label>
+                    <input type = "text" id = "nick" name = "nick">
+                </div>
+                <div class = "password_box">
+                     <label class = "item" for = "nick">密码</label>
+                    <input type = "password" id = "password" name = "password">
+                </div>
+                <div class = "phone_box">
+                     <label class = "item" for = "phone">手机</label>
+                    <input type = "phone" id = "phone" name = "nick">
+                </div>
+                <input type = "submit" value = "注册">
+            </form>
         </div>
     </body>
 </html>

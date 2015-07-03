@@ -25,7 +25,13 @@ class UserController extends Controller {
 			return 'true';
 		}
     }
-    
+    public function getRegister(){
+			return \View::make('register');
+    	//return 'register';
+	}
+	public function postRegister(){
+		return 'success';
+	}
     public function anyFindContact(){
 			$account = Input::get('account');
 			$res =  DB::table('user') -> where('account', $account) -> get();
