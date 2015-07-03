@@ -26,14 +26,19 @@ class UserController extends Controller {
     public function postLogin(Request $request)
     {
         $account = $request->input('account');
-		$password = Hash::make(Input::get('password'));
+		$password = $request->input('password');
 		//$password = $request->input('password');
-		$res = \DB::table('user') -> where('account', $account) -> where('password', $password) -> get();
+		$res = \DB::table('user') -> where('account', $account) -> get();
 		if($res == NULL){
 			return 'false';
 		}
 		else{
-			return 'true';
+			//$res = array($res);
+			$hash = $res[0]->password;
+			if(crypt($password, $hash) == $hash){
+				return  'true';
+			}
+			return 'false';
 		}
     }
     public function getRegister(){
@@ -66,11 +71,18 @@ class UserController extends Controller {
 		return $res;
 	}
 
+	public function getAddContact(){
+		return \View::make('add_contact');
+	}
+
 	public function postAddContact(Request $request){
 		$from = $request->input('from');
 		$to = $request->input('to');
-		$cache = array('from' => )
+		$cache = array('from' => $from, 'to' => $to, 'time' => time());
+		\DB::table('cache_add_contact') -> insert($cache);
+		return $cache;
 	}
 
+	//public function 
 
 }
