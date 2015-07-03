@@ -44,14 +44,18 @@ class UserController extends Controller {
 			$res = \DB::table('user') -> where('account', $account) -> get();
 		}
 
-		$user = array('account' => $account, 'password' => $password, 'phone' => $phone);
+		$user = array('account' => $account, 'password' => $password, 'phone' => $phone, 'nickname' => $nick);
 		\DB::table('user') -> insert($user);
 		return $user;
 	}
-    public function anyFindContact(){
-			$account = Input::get('account');
-			$res =  DB::table('user') -> where('account', $account) -> get();
-			return $res;
-		}
+
+    public function postFindContact(){
+		$account = Input::get('account');
+		$res =  DB::table('user') -> where('account', $account) -> get();
+		return $res;
+	}
+	
+	//public 	
+
 
 }
