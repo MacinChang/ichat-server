@@ -12,6 +12,14 @@ class UserController extends Controller {
      * @param  int  $id
      * @return Response
      */
+
+    public function getUserList(){
+    	$res = \DB::table('user') -> get();
+    	echo '<pre>';
+    	print_r($res);
+    	echo '</pre>';
+
+    }
     public function getLogin(){
     	return \View::make('login');
     }
@@ -54,6 +62,7 @@ class UserController extends Controller {
 		$res =  \DB::table('user') -> where('account', $account) -> get();
 		return $res;
 	}
+
 	
 	//public 	
 
