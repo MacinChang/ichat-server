@@ -49,9 +49,9 @@ class UserController extends Controller {
 		return $user;
 	}
 
-    public function postFindContact(){
-		$account = Input::get('account');
-		$res =  DB::table('user') -> where('account', $account) -> get();
+    public function getFindContact(Request $request){
+		$account = $request->input('account');
+		$res =  \DB::table('user') -> where('account', $account) -> get();
 		return $res;
 	}
 	
