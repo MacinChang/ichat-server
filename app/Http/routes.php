@@ -14,3 +14,4 @@ Route::get('/', function(){
 	return 'index';
 });
 Route::controller('user', 'UserController');
+Route::controller('group', 'GroupController');
