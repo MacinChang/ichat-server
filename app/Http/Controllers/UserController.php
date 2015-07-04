@@ -119,7 +119,7 @@ class UserController extends Controller {
 		//加载分组和组内好友
 	}
 	//加载资料卡
-	public function anyLoadInfo(Request $request){
+	public function anyGetInfo(Request $request){
 		$account = $request->input('account');
 		$res = \DB::table('user') -> where('account', $account) -> first();
 		return $res;
