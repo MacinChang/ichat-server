@@ -17,7 +17,7 @@ class UserController extends Controller {
     	$res = \DB::table('user') -> get();
     	echo '<pre>';
     	print_r($res);
-    	echo '</pre>'
+    	echo '</pre>';
     }
     //测试-登录界面
     public function getLogin(){
