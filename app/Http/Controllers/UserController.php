@@ -68,7 +68,7 @@ class UserController extends Controller {
 		echo '<pre>';
     	print_r($user);
     	echo '</pre>';
-    	return $user;
+    	//return $user;
 	}
 
 	//查找好友
@@ -78,7 +78,7 @@ class UserController extends Controller {
 		echo '<pre>';
     	print_r($res);
     	echo '</pre>';
-		return $res;
+		//return $res;
 	}
 	//测试-添加好友
 	public function getAddContact(){
