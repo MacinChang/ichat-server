@@ -130,4 +130,4 @@ class UserController extends Controller {
 		//检测新的加群申请
 	}
 
-}date_default_timezone_set('PRC');
+}
