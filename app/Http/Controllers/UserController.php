@@ -119,7 +119,7 @@ class UserController extends Controller {
 	public function anyGetInfo(Request $request){
 		$account = $request->input('account');
 		$res = \DB::table('user') -> where('account', $account) -> get();
-		return $res;
+		return $res[0];
 		//获取账号资料
 	}
 
