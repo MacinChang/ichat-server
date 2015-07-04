@@ -17,8 +17,7 @@ class UserController extends Controller {
     	$res = \DB::table('user') -> get();
     	echo '<pre>';
     	print_r($res);
-    	echo '</pre>';
-
+    	echo '</pre>'
     }
     //测试-登录界面
     public function getLogin(){
@@ -120,8 +119,10 @@ class UserController extends Controller {
 		//加载分组和组内好友
 	}
 	//加载资料卡
-	public function postLoadInfo(Request $request){
+	public function anyLoadInfo(Request $request){
 		$account = $request->input('account');
+		$res = \DB::table('user') -> where('account', $account) -> first();
+		return $res;
 		//获取账号资料
 	}
 
