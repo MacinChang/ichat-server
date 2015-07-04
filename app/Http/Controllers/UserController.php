@@ -118,8 +118,9 @@ class UserController extends Controller {
 	//加载资料卡
 	public function anyGetInfo(Request $request){
 		$account = $request->input('account');
-		$res = \DB::table('user') -> where('account', $account) -> get();
-		return $res[0];
+		$res =  \DB::table('user') -> where('account', $account) -> get();
+		return json_encode($res[0]);
+		//return 1;
 		//获取账号资料
 	}
 
