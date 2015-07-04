@@ -74,8 +74,7 @@ class UserController extends Controller {
     public function anyFindContact(Request $request){
 		$account = $request->input('account');
 		$res =  \DB::table('user') -> where('account', $account) -> get();
-		$data = array($res[0]);
-		return json_encode($data);
+		return json_encode($res[0]);
 	}
 	//测试-添加好友
 	public function getAddContact(){
