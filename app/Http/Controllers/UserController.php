@@ -129,5 +129,4 @@ class UserController extends Controller {
 		//检测新的好友申请
 		//检测新的加群申请
 	}
-
 }
