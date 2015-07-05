@@ -126,7 +126,7 @@ class UserController extends Controller {
 	}
 
 	//加载主面板
-	public function getLoadPanel(Request $request){
+	public function anyLoadPanel(Request $request){
 		$account =  $request->input('account');
 		$self = \DB::table('user') -> where('account', $account) 
 			-> select('account', 'nickname', 'head', 'level', 'age', 'gender', 'signature') ->first();
