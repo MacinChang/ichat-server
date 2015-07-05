@@ -154,6 +154,7 @@ class UserController extends Controller {
 		echo '<pre>';
 		print_r($data);
 		echo '</pre>';
+		return json_encode($data);
 		//加载分组和组内好友
 	}
 	//加载资料卡
@@ -164,7 +165,29 @@ class UserController extends Controller {
 		//return 1;
 		//获取账号资料
 	}
+	public function anySetInfo(Request $request){
 
+		$account = $request -> input('account');
+		$gender = $request -> input('gender');
+		$signature = $request -> input('signature');
+		$nickname = $request -> input('nickname');
+		$phone = $request -> input('phone');
+		$age = $request -> input('age');
+		$level = $request -> input('level');
+		$home = $request -> input('home');
+		$location = $request -> input('location');
+		$birth = $request -> input('birth');
+		$data = array('account' => $account, 'gender' => $gender, 'nickname' => $nickname, 
+				'phone' => $phone, 'age' => $age, 'level' => $level, 'hometown' => $home, 
+				'location' => $location, 'birth' => $birth, 'signature' => $signature);
+		$res = \DB::table('user') -> where('account', $account) -> update($data);
+		if($res){
+			return 'true';
+		}else{
+			return  'fallse';
+		}
+
+	}
 	//刷新消息
 	public function postUpdate(){
 		//检测新的个人消息
