@@ -157,9 +157,9 @@ class UserController extends Controller {
 		//return $contacts;
 		array_push($class, $contacts);
 		$data = array('self' => (array)$self, 'contact' => $class);
-		echo '<pre>';
-		print_r($data);
-		echo '</pre>';
+		// echo '<pre>';
+		// print_r($data);
+		// echo '</pre>';
 		return json_encode($data);
 		//加载分组和组内好友
 	}
