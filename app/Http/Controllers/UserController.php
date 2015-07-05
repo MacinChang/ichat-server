@@ -83,11 +83,13 @@ class UserController extends Controller {
 	}
 
 	//发送添加好友请求
-	public function postAddContact(Request $request){
+	public function anyAddContact(Request $request){
 		$from = $request->input('from');
 		$to = $request->input('to');
+		$info = $request -> input('info');
+		$remark = $request -> input('remark');
 		date_default_timezone_set('PRC');
-		$cache = array('from' => $from, 'to' => $to, 'time' => date('Y-m-d H:i:s', time()));
+		$cache = array('info' => $info, 'from' => $from, 'to' => $to, 'time' => date('Y-m-d H:i:s', time()));
 		$res = \DB::table('cache_add_contact') -> where('from', $from) -> where('to', $to) -> first();
 		if($res == NULL){
 			\DB::table('cache_add_contact') -> insert($cache);	
@@ -96,7 +98,11 @@ class UserController extends Controller {
 			\DB::table('cache_add_contact') -> where('from', $from) -> where('to', $to) -> update($cache);
 		}
 		$res = \DB::table('cache_add_contact') -> where('from', $from) -> where('to', $to) -> get();
-		return $res;
+		if($res){
+			return  'true';
+		}else{
+			return 'false';
+		}
 	}
 	//通过好友请求
 	public function postPassRequest(Request $request){
@@ -180,12 +186,8 @@ class UserController extends Controller {
 		$data = array('account' => $account, 'gender' => $gender, 'nickname' => $nickname, 
 				'phone' => $phone, 'age' => $age, 'level' => $level, 'hometown' => $home, 
 				'location' => $location, 'birth' => $birth, 'signature' => $signature);
+		//return  $data;
 		$res = \DB::table('user') -> where('account', $account) -> update($data);
-		if($res){
-			return 'true';
-		}else{
-			return  'fallse';
-		}
 
 	}
 	//刷新消息
