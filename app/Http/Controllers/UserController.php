@@ -15,6 +15,7 @@ class UserController extends Controller {
     //测试-用户列表
     public function getUserList(){
     	$res = \DB::table('user') -> get();
+    	return 'true';
     	echo '<pre>';
     	print_r($res);
     	echo '</pre>';
@@ -107,12 +108,52 @@ class UserController extends Controller {
 		$user_id = $request->input('user_id');
 		$contact_id = $request->input('contact_id');
 		//删除好友关系
+		$res1 = \DB::table('contact_relation') -> where('user_id', $user_id) 
+					-> where('contact_id', $contact_id) -> delete();
+		$res2 = \DB::table('contact_relation') -> where('user_id',  $contact_id)
+					->  where('contact_id', $user_id) -> delete();
+		if($res1 && $res2){
+			return 'true';
+		}else{
+			return 'false';
+		}
 	}
 
 	//加载主面板
-	public function postLoadPanel(Request $request){
+	public function getLoadPanel(Request $request){
 		$account =  $request->input('account');
-		$res = \DB::table('contact_relation') -> where('user_id', $account) -> orderBy('class_id', 'ASC') -> get();
+		$self = \DB::table('user') -> where('account', $account) 
+			-> select('account', 'nickname', 'head', 'level', 'age', 'gender', 'signature') ->first();
+		$res = \DB::table('contact_relation') -> where('user_id', $account) 
+						-> orderBy('class_id', 'ASC') -> get();
+		$class = array();
+		$i = $res[0] -> class_id;
+		$temp = \DB::table('user_class') -> where('id', $i) -> first();
+		$classname = $temp -> name;
+		$contacts = array();
+		foreach ($res as $node) {
+			if($node -> class_id != $i){
+				$contacts = array('classname' => $classname, 'contact' => $contacts);
+				array_push($class, $contacts);
+				$i = $node -> class_id;
+				$temp = \DB::table('user_class') -> where('id', $i) -> first();
+				$classname = $temp -> name;
+				$contacts = array();
+			}
+			$temp = \DB::table('user') -> where('account', $node -> contact_id) 
+				-> select('account', 'nickname', 'head', 'level', 'age', 'gender', 'signature') ->get();
+			$temp = (array)$temp[0];	
+			$temp['remark'] = $node -> remark;
+			array_push($contacts, $temp);
+		}
+		//return  $contacts;
+		$contacts = array('classname' => $classname, 'contact' => $contacts);
+		//return $contacts;
+		array_push($class, $contacts);
+		$data = array('self' => (array)$self, 'contact' => $class);
+		echo '<pre>';
+		print_r($data);
+		echo '</pre>';
 		//加载分组和组内好友
 	}
 	//加载资料卡
@@ -127,6 +168,7 @@ class UserController extends Controller {
 	//刷新消息
 	public function postUpdate(){
 		//检测新的个人消息
+
 		//检测新的群消息
 		//检测新的好友申请
 		//检测新的加群申请
