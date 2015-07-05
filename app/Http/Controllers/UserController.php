@@ -89,7 +89,7 @@ class UserController extends Controller {
 		$info = $request -> input('info');
 		$remark = $request -> input('remark');
 		date_default_timezone_set('PRC');
-		$cache = array('info' => $info, 'from' => $from, 'to' => $to, 'time' => date('Y-m-d H:i:s', time()));
+		$cache = array('remark' => $remark, 'info' => $info, 'from' => $from, 'to' => $to, 'time' => date('Y-m-d H:i:s', time()));
 		$res = \DB::table('cache_add_contact') -> where('from', $from) -> where('to', $to) -> first();
 		if($res == NULL){
 			\DB::table('cache_add_contact') -> insert($cache);	
