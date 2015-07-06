@@ -206,13 +206,33 @@ class UserController extends Controller {
 			return  'fasle';
 		}
 	}
+
 	public function anySetClassname(Request $request){
-		//$account = $request -> input('account');
-		//$class_id = 
+		$account = $request -> input('account');
+		$class_id = $request -> input('class_id');
+		$name = $request -> inpute('classnname');
+		$res = \DB::table('user_class') -> where('Id', $class_id) -> update(array('name' => $classname));
+		if($res){
+			return 'true';
+		}else{
+			return  'fasle';
+		}
 	}
 	public function anyDelClass(Request $request){
-
+		$account = $request -> input('account');
+		$class_id = $request -> input('class_id');
+		$res = \DB::table('contact_relation') -> where('user_id', $account) -> select('class_id') -> first();
+		$id = $res -> class_id;
+		$res = \DB::table('contact_relation') -> where('user_id',  $account) 
+			-> where('class_id', $class_id) -> update(array('class_id' => $id));
+		$res = \DB::table('user_class') -> where('Id', $class_id) -> delete();
+		if($res){
+			return 'true';
+		}else{
+			return  'fasle';
+		}
 	}
+
 	public function anySetInfo(Request $request){
 
 		$account = $request -> input('account');
