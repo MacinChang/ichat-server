@@ -192,6 +192,18 @@ class UserController extends Controller {
 			return  'fasle';
 		}
 	}
+	public function anySetRemark(Request $request){
+		$user_id = $request -> input('user_id');
+		$contact_id = $request -> input('contact_id');
+		$remark = $request -> input('remark');
+		$res = \DB::table('contact_relation') -> where('user_id', $user_id)
+		 -> where('contact_id', $contact_id) -> update(array('remark' => $remark));
+		if($res){
+			return 'true';
+		}else{
+			return  'fasle';
+		}
+	}
 	public function anySetInfo(Request $request){
 
 		$account = $request -> input('account');
