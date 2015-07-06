@@ -110,7 +110,7 @@ class UserController extends Controller {
 
 	}
 	//删除好友
-	public function postDeleteContact(Request $request){
+	public function anyDelContact(Request $request){
 		$user_id = $request->input('user_id');
 		$contact_id = $request->input('contact_id');
 		//删除好友关系
