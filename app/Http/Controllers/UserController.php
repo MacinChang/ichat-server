@@ -234,6 +234,16 @@ class UserController extends Controller {
 		}
 	}
 
+	public function anyNewClass(Request $request){
+		$account = $request -> input('account');
+		$name = $request -> input('classname');
+		$res = \DB::table('user_class') -> insert(array('name' => $name, 'account' => $account));
+		//echo $res;
+		if($res){
+			$res = \DB::table('user_class') -> where('account', $account) -> where('name', $name) -> select('Id') -> first();
+			return  $res -> Id;	
+		}
+	}
 	public function anySetInfo(Request $request){
 
 		$account = $request -> input('account');
