@@ -136,14 +136,16 @@ class UserController extends Controller {
 		$i = $res[0] -> class_id;
 		$temp = \DB::table('user_class') -> where('id', $i) -> first();
 		$classname = $temp -> name;
+		$class_id = $temp -> Id;
 		$contacts = array();
 		foreach ($res as $node) {
 			if($node -> class_id != $i){
-				$contacts = array('classname' => $classname, 'contact' => $contacts);
+				$contacts = array('classname' => $classname, 'class_id' => "$class_id", 'contact' => $contacts);
 				array_push($class, $contacts);
 				$i = $node -> class_id;
 				$temp = \DB::table('user_class') -> where('id', $i) -> first();
 				$classname = $temp -> name;
+				$class_id = $temp ->  Id;
 				$contacts = array();
 			}
 			$temp = \DB::table('user') -> where('account', $node -> contact_id) 
@@ -153,7 +155,7 @@ class UserController extends Controller {
 			array_push($contacts, $temp);
 		}
 		//return  $contacts;
-		$contacts = array('classname' => $classname, 'contact' => $contacts);
+		$contacts = array('classname' => $classname, 'class_id' => "$class_id", 'contact' => $contacts);
 		//return $contacts;
 		array_push($class, $contacts);
 		$data = array('self' => (array)$self, 'contact' => $class);
@@ -203,6 +205,13 @@ class UserController extends Controller {
 		}else{
 			return  'fasle';
 		}
+	}
+	public function anySetClassname(Request $request){
+		//$account = $request -> input('account');
+		//$class_id = 
+	}
+	public function anyDelClass(Request $request){
+
 	}
 	public function anySetInfo(Request $request){
 
