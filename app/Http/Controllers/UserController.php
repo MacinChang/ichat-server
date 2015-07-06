@@ -171,6 +171,16 @@ class UserController extends Controller {
 		//return 1;
 		//获取账号资料
 	}
+	public function anySetHead(Request $request){
+		$account = $request -> input('account');
+		$head = $request -> input('head');
+		$res = \DB::table('user') -> where('account', $account) -> update(array('head' => $head));
+		if($res){
+			return 'true';
+		}else{
+			return 'false';
+		}
+	}
 	public function anySetInfo(Request $request){
 
 		$account = $request -> input('account');
