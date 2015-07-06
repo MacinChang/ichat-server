@@ -130,34 +130,39 @@ class UserController extends Controller {
 		$account =  $request->input('account');
 		$self = \DB::table('user') -> where('account', $account) 
 			-> select('account', 'nickname', 'head', 'level', 'age', 'gender', 'signature') ->first();
-		$res = \DB::table('contact_relation') -> where('user_id', $account) 
-						-> orderBy('class_id', 'ASC') -> get();
+		$res_class = \DB::table('user_class') -> where('account', $account) 
+						-> orderBy('Id', 'ASC') -> get();
 		$class = array();
-		$i = $res[0] -> class_id;
-		$temp = \DB::table('user_class') -> where('id', $i) -> first();
-		$classname = $temp -> name;
-		$class_id = $temp -> Id;
+		//$i = $res[0] -> Id;
+		$i = 0;
+		$classname = $res_class[0] -> name;
+		$class_id = $res_class[0] -> Id;
 		$contacts = array();
-		foreach ($res as $node) {
-			if($node -> class_id != $i){
-				$contacts = array('classname' => $classname, 'class_id' => "$class_id", 'contact' => $contacts);
+		//return  $res_class;
+		foreach($res_class as $node_class){
+			$res_contact = \DB::table('contact_relation') -> where('class_id', $node_class -> Id) -> get();
+			//return $res_contact;
+			if($res_contact == NULL){
+				//return 1;
+				$contacts = array('classname' => $classname, 'class_id' => $class_id, 'contact' => 'null');
 				array_push($class, $contacts);
-				$i = $node -> class_id;
-				$temp = \DB::table('user_class') -> where('id', $i) -> first();
-				$classname = $temp -> name;
-				$class_id = $temp ->  Id;
+				//return $class;
 				$contacts = array();
+				continue;
 			}
-			$temp = \DB::table('user') -> where('account', $node -> contact_id) 
-				-> select('account', 'nickname', 'head', 'level', 'age', 'gender', 'signature', 'state') ->get();
-			$temp = (array)$temp[0];	
-			$temp['remark'] = $node -> remark;
-			array_push($contacts, $temp);
+			foreach($res_contact as $node_contact){
+				$temp = \DB::table('user') -> where('account', $node_contact -> contact_id) 
+					-> select('account', 'nickname', 'head', 'level', 'age', 'gender', 'signature', 'state') ->get();
+				$temp = (array)$temp[0];
+				$temp['remark'] = $node_contact -> remark;
+				array_push($contacts, $temp);
+				//return $contacts;
+			}
+			$contacts = array('classname' => $classname, 'class_id' => $class_id, 'contact' => $contacts);
+			array_push($class, $contacts);
+			//return  $contacts;
+			$contacts = array();
 		}
-		//return  $contacts;
-		$contacts = array('classname' => $classname, 'class_id' => "$class_id", 'contact' => $contacts);
-		//return $contacts;
-		array_push($class, $contacts);
 		$data = array('self' => (array)$self, 'contact' => $class);
 		// echo '<pre>';
 		// print_r($data);
