@@ -210,7 +210,7 @@ class UserController extends Controller {
 	public function anySetClassname(Request $request){
 		$account = $request -> input('account');
 		$class_id = $request -> input('class_id');
-		$name = $request -> inpute('classnname');
+		$name = $request -> input('classnname');
 		$res = \DB::table('user_class') -> where('Id', $class_id) -> update(array('name' => $name));
 		if($res){
 			return 'true';
