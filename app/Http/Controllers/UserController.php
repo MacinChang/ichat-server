@@ -176,9 +176,20 @@ class UserController extends Controller {
 		$head = $request -> input('head');
 		$res = \DB::table('user') -> where('account', $account) -> update(array('head' => $head));
 		if($res){
+			echo $head;
 			return 'true';
 		}else{
 			return 'false';
+		}
+	}
+	public function anySetState(Request $request){
+		$account = $request -> input('account');
+		$state = $request -> input('state');
+		$res = \DB::table('user') ->  where('account', $acccount) -> update(array('state' => $state));
+		if($res){
+			return 'true';
+		}else{
+			return  'fasle';
 		}
 	}
 	public function anySetInfo(Request $request){
