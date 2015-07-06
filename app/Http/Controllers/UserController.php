@@ -147,7 +147,7 @@ class UserController extends Controller {
 				$contacts = array();
 			}
 			$temp = \DB::table('user') -> where('account', $node -> contact_id) 
-				-> select('account', 'nickname', 'head', 'level', 'age', 'gender', 'signature') ->get();
+				-> select('account', 'nickname', 'head', 'level', 'age', 'gender', 'signature', 'state') ->get();
 			$temp = (array)$temp[0];	
 			$temp['remark'] = $node -> remark;
 			array_push($contacts, $temp);
