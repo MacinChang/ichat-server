@@ -134,12 +134,12 @@ class UserController extends Controller {
 						-> orderBy('Id', 'ASC') -> get();
 		$class = array();
 		//$i = $res[0] -> Id;
-		$i = 0;
-		$classname = $res_class[0] -> name;
-		$class_id = $res_class[0] -> Id;
+		$i  = 0;
 		$contacts = array();
 		//return  $res_class;
 		foreach($res_class as $node_class){
+			$classname = $res_class[$i] -> name;
+			$class_id = $res_class[$i] -> Id;
 			$res_contact = \DB::table('contact_relation') -> where('class_id', $node_class -> Id) -> get();
 			//return $res_contact;
 			if($res_contact == NULL){
@@ -148,6 +148,7 @@ class UserController extends Controller {
 				array_push($class, $contacts);
 				//return $class;
 				$contacts = array();
+				$i++;
 				continue;
 			}
 			foreach($res_contact as $node_contact){
@@ -162,6 +163,7 @@ class UserController extends Controller {
 			array_push($class, $contacts);
 			//return  $contacts;
 			$contacts = array();
+			$i++;
 		}
 		$data = array('self' => (array)$self, 'contact' => $class);
 		// echo '<pre>';
