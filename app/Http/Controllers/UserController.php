@@ -196,7 +196,7 @@ class UserController extends Controller {
 	public function anySetState(Request $request){
 		$account = $request -> input('account');
 		$state = $request -> input('state');
-		$res = \DB::table('user') ->  where('account', $acccount) -> update(array('state' => $state));
+		$res = \DB::table('user') ->  where('account', $account) -> update(array('state' => $state));
 		if($res){
 			return 'true';
 		}else{
