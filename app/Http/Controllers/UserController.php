@@ -281,7 +281,7 @@ class UserController extends Controller {
 		$user_id = $request -> input('user_id');
 		$contact_id = $request -> input('contact_id');
 		$class_id = $request -> input('class_id');
-		echo $user_id;
+		//echo $user_id;
 		$res = \DB::table('contact_relation') -> where('user_id', $user_id) 
 			-> where('contact_id', $contact_id) -> update(array('class_id' => $class_id));
 		if($res){
