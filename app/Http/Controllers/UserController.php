@@ -180,6 +180,7 @@ class UserController extends Controller {
 		//return 1;
 		//获取账号资料
 	}
+	//设置头像
 	public function anySetHead(Request $request){
 		$account = $request -> input('account');
 		$head = $request -> input('head');
@@ -191,6 +192,7 @@ class UserController extends Controller {
 			return 'false';
 		}
 	}
+	//设置状态
 	public function anySetState(Request $request){
 		$account = $request -> input('account');
 		$state = $request -> input('state');
@@ -201,6 +203,7 @@ class UserController extends Controller {
 			return  'fasle';
 		}
 	}
+	//设置备注
 	public function anySetRemark(Request $request){
 		$user_id = $request -> input('user_id');
 		$contact_id = $request -> input('contact_id');
@@ -213,19 +216,20 @@ class UserController extends Controller {
 			return  'fasle';
 		}
 	}
-
+	//更改分组名
 	public function anySetClassname(Request $request){
 		$account = $request -> input('account');
 		$class_id = $request -> input('class_id');
 		$name = $request -> input('classname');
 		$res = \DB::table('user_class') -> where('Id', $class_id) -> update(array('name' => $name));
 		if($res){
-			echo mysql_error();
+			//echo mysql_error();
 			return 'true';
 		}else{
 			return  'fasle';
 		}
 	}
+	//删除分组
 	public function anyDelClass(Request $request){
 		$account = $request -> input('account');
 		$class_id = $request -> input('class_id');
@@ -240,7 +244,7 @@ class UserController extends Controller {
 			return  'fasle';
 		}
 	}
-
+	//新建分组
 	public function anyNewClass(Request $request){
 		$account = $request -> input('account');
 		$name = $request -> input('classname');
@@ -251,6 +255,8 @@ class UserController extends Controller {
 			return  $res -> Id;	
 		}
 	}
+
+	//设置个人资料
 	public function anySetInfo(Request $request){
 
 		$account = $request -> input('account');
@@ -259,16 +265,31 @@ class UserController extends Controller {
 		$nickname = $request -> input('nickname');
 		$phone = $request -> input('phone');
 		$age = $request -> input('age');
-		$level = $request -> input('level');
+		//$level = $request -> input('level');
 		$home = $request -> input('home');
 		$location = $request -> input('location');
 		$birth = $request -> input('birth');
 		$data = array('account' => $account, 'gender' => $gender, 'nickname' => $nickname, 
-				'phone' => $phone, 'age' => $age, 'level' => $level, 'hometown' => $home, 
+				'phone' => $phone, 'age' => $age, 'hometown' => $home, 
 				'location' => $location, 'birth' => $birth, 'signature' => $signature);
 		//return  $data;
 		$res = \DB::table('user') -> where('account', $account) -> update($data);
 
+	}
+	//修改分组
+	public function anySetClass(Request $request){
+		$user_id = $request -> input('user_id');
+		$contact_id = $request -> input('contact_id');
+		$class_id = $request -> input('class_id');
+		echo $user_id;
+		$res = \DB::table('contact_relation') -> where('user_id', $user_id) 
+			-> where('contact_id', $contact_id) -> update(array('class_id' => $class_id));
+		if($res){
+			return 'true';
+		}else{
+			//mysql_error();
+			return 'false';
+		}
 	}
 	//刷新消息
 	public function postUpdate(){
