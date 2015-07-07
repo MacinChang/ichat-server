@@ -129,7 +129,7 @@ class UserController extends Controller {
 	public function anyLoadPanel(Request $request){
 		$account =  $request->input('account');
 		$self = \DB::table('user') -> where('account', $account) 
-			-> select('account', 'nickname', 'head', 'level', 'age', 'gender', 'signature') ->first();
+			-> select('account', 'nickname', 'head', 'level', 'age', 'gender', 'signature', 'state') ->first();
 		$res_class = \DB::table('user_class') -> where('account', $account) 
 						-> orderBy('Id', 'ASC') -> get();
 		$class = array();
