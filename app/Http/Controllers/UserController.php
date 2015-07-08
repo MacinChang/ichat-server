@@ -82,23 +82,18 @@ class UserController extends Controller {
 		return \View::make('add_contact');
 	}
 
-	//发送添加好友请求
+	//添加好友
 	public function anyAddContact(Request $request){
 		$from = $request->input('from');
 		$to = $request->input('to');
-		$info = $request -> input('info');
+		//$info = $request -> input('info');
 		$remark = $request -> input('remark');
-		date_default_timezone_set('PRC');
-		$cache = array('remark' => $remark, 'info' => $info, 'from' => $from, 'to' => $to, 'time' => date('Y-m-d H:i:s', time()));
-		$res = \DB::table('cache_add_contact') -> where('from', $from) -> where('to', $to) -> first();
-		if($res == NULL){
-			\DB::table('cache_add_contact') -> insert($cache);	
-		}
-		else{
-			\DB::table('cache_add_contact') -> where('from', $from) -> where('to', $to) -> update($cache);
-		}
-		$res = \DB::table('cache_add_contact') -> where('from', $from) -> where('to', $to) -> get();
-		if($res){
+		$class_id1 = $request -> input('class_id');
+		$res = \DB::table('user_class') -> where('account', $to) -> first();
+		$class_id2 = $res -> Id;
+		$res1 = \DB::table('contact_relation') -> insert(array('user_id' => $from, 'contact_id' => $to, 'class_id' => $class_id1, 'remark' => $remark));
+		$res2 = \DB::table('contact_relation') -> insert(array('user_id' => $to, 'contact_id' => $from, 'class_id' => $class_id2, 'remark' => 'noremark'));
+		if($res1 && $res2){
 			return  'true';
 		}else{
 			return 'false';
