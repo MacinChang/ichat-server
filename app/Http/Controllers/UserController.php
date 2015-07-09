@@ -60,7 +60,7 @@ class UserController extends Controller {
     }
     //注册界面
     public function getRegister(){
-		return \View::make('register');
+		return \View::make('register_1');
     	//return rand(1001, 100000);
     	//return 'register';
 	}
@@ -76,11 +76,10 @@ class UserController extends Controller {
 			$account = rand(10001, 99999);
 			$res = \DB::table('user') -> where('account', $account) -> get();
 		}
-		$user = array('account' => $account, 'password' => $password, 'phone' => $phone, 'nickname' => $nick);
+		$user = array('account' => $account, 'password' => $password, 'phone' => $phone, 'nickname' => $nick, 'level' => 1, 'signature' => 'default signature', );
 		\DB::table('user') -> insert($user);
-		echo '<pre>';
-    	print_r($user);
-    	echo '</pre>';
+		\DB::table('user_class') -> insert(array('name' => 'my friends', 'account' => $account));
+		return view('welcome', ['account' => "$account"]);
     	//return $user;
 	}
 
@@ -105,7 +104,7 @@ class UserController extends Controller {
 		$res = \DB::table('user_class') -> where('account', $to) -> first();
 		$class_id2 = $res -> Id;
 		$res1 = \DB::table('contact_relation') -> insert(array('user_id' => $from, 'contact_id' => $to, 'class_id' => $class_id1, 'remark' => $remark));
-		$res2 = \DB::table('contact_relation') -> insert(array('user_id' => $to, 'contact_id' => $from, 'class_id' => $class_id2, 'remark' => 'noremark'));
+		$res2 = \DB::table('contact_relation') -> insert(array('user_id' => $to, 'contact_id' => $from, 'class_id' => $class_id2, 'remark' => 'null'));
 		if($res1 && $res2){
 			return  'true';
 		}else{

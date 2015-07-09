@@ -1,0 +1,194 @@
+﻿/*********************************************
+Copyright：hubble;
+Author:moge;
+Date:2015-06-13
+Description:登录页面第一版的样式文件
+
+*********************************************/
+ body{
+	  background:url(../images/login/bg.jpg);
+	  background-size:cover;
+	  font-family: "Microsoft YaHei", "微软雅黑", "SimSun", "宋体";
+	  margin:0px;
+	  padding:0px;
+	  overflow-x:hidden;
+	  overflow-y:hidden; 
+	 }
+	 a{
+	   color:white;
+	 }
+	
+	 header{
+       width:100%;
+	 }
+	 header>p{
+       width:5%;
+       height:60px;
+       background-color:#333333;
+       cursor:pointer;
+       color:white;
+       font-size:25px;
+       font-weight:400;
+       float:left;
+       text-align:center;
+       margin-top:0px;
+       line-height: 60px;
+	 }
+	 header>span{
+		width:100%;
+		height:60px;
+		color:#F2F2F2;
+		background-color:rgba(0,0,0,1);
+		display: block;
+		font-size:22px;
+		font-weight:400;
+		text-align: left;
+		line-height:60px;
+		padding-left:87px;
+		}
+	 .container{
+		background:url(../images/login/u0.png);
+		width:52%;
+		height:430px;
+		margin:0px auto;
+		margin-top:50px;
+	}
+	.form{
+        width:80%;
+        margin:7px auto;
+        color:white;
+        font-size:16px;
+        padding-top:80px;
+	}
+	.form div{
+		margin-left:30px;
+		margin-top:18px;
+	}
+	.form label{
+		width:80px;
+		display:inline-block;
+	}
+	.form div>input{
+		margin-left:30px;
+	 	width: 240px;
+        padding: 5px 5px;
+        border: 1px solid #cdcdcd;
+        font-size: 14px;
+        color: #333;
+        border-radius: 2px;
+        box-shadow: 1px 1px 1px 0 #eaeaea inset;		
+	}
+	select{
+		width:252px;
+		height:28px;
+		font-family: "微软雅黑", Verdana, Arial, Helvetica, sans-serif;
+	}
+	.tel_check>input+span{
+       background-color:#cdcdcd;
+       padding:5px 28px 5px 28px;
+       cursor:pointer;
+       margin-left:-2px;
+       font-size:13px;
+       color:rgba(161, 12, 211, 0.82);
+
+	}
+	.checkbox {
+       position: relative;
+       left:90px;
+	}
+	.checkbox span{
+		margin-left:30px;
+		width:250px;
+		font-size:12px;
+	}
+	input[type="submit"]{
+		background-color:#2582bd;
+		cursor:pointer;
+	    appearance:button;
+       -moz-appearance:button; /* Firefox */
+       -webkit-appearance:button; /* Safari 和 Chrome */
+	}
+	.btn{
+		position: relative;
+		left:120px;
+	}
+	button{
+		width:250px;
+		height:35px;
+		background-color:#2582bd;
+		overflow:visible;
+		border:1px solid #2582bd;
+		color:white;
+		font-size:14px;
+		cursor:pointer;
+		font-weight:500;
+		font-size:18px;
+	}
+	input:-webkit-autofill {
+     -webkit-box-shadow: 0 0 0px 1000px white inset;
+     -webkit-text-fill-color: #333;
+}
+	#wemail,#wtel,#wpwd_1,#wpwd_2{
+		display: none;
+ 	    padding:6px 12px 8px 8px;
+ 	    margin-left: 6px;
+ 	    color:rgb(255, 0, 0);
+ 	    font-size:12px;
+	}
+	#mail_bg{
+		width:20px;
+		height:20px;
+		margin-right:6px;
+		display: inline-block;
+       background: url(../images/login/wran.png);
+       vertical-align: middle;
+	}
+     #tel_bg{
+    	width:20px;
+		height:20px;
+		margin-right:6px;
+		display: inline-block;
+    	background: url(../images/login/wran.png) ;
+    	vertical-align: middle;
+    }
+    #pwd_bg{
+    	width:20px;
+		height:20px;
+		margin-right:6px;
+		display: inline-block;
+    	background: url(../images/login/wran.png);
+    	vertical-align: middle;
+    }
+    #checkpwd_bg{
+    	width:20px;
+		height:20px;
+		margin-right:6px;
+		display: inline-block;
+    	background: url(../images/login/wran.png);
+    	vertical-align: middle;
+    }
+    #main_bg{
+    	width:20px;
+		height:20px;
+		margin-right:6px;
+		display: inline-block;
+    	background: url(http://1.whyme.sinaapp.com/yes.png);
+    	vertical-align: middle;
+    }
+	.star{
+		color:#f00;
+		margin-right:5px;
+	}
+    footer{
+  	clear:both;
+    width:100%;
+  	background: url(../images/login/u0.png);
+  	position: absolute;
+  	bottom: 0px;
+  	padding:8px 0px 8px 200px;
+   }
+   footer span{
+ 	font-size:14px;
+ 	font-weight:400;
+    color: #666666;
+  }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>注册成功</title>
 
         
 
@@ -29,16 +29,21 @@
                 text-align: center;
                 display: inline-block;
             }
-
+            .head{
+                font-family: "YaHei Consolas Hybrid";
+            }
             .title {
                 font-size: 96px;
+                color: red;
+                font-family: "YaHei Consolas Hybrid";
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <h1 class = "head">你的iChat号码是</h1>
+                <div class="title">{{$account}}</div>
             </div>
         </div>
     </body>
