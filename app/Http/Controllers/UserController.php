@@ -33,7 +33,7 @@ class UserController extends Controller {
 		$password = $request->input('password');
 		//$ip = $_SERVER['REQUEST_URI'];
 		$ip = getenv('REMOTE_ADDR');
-		echo "{$_SERVER["REMOTE_ADDR"]}\n$ip\n";
+		echo "{$ip} "
 		//echo $ip;
 		//$password = $request->input('password');
 		$res = \DB::table('user') -> where('account', $account) -> get();
@@ -49,6 +49,17 @@ class UserController extends Controller {
 			}
 			return 'false';
 		}
+    }
+    //设置端口
+    public function anySetPort(Request $request){
+    	$account = $request -> input('account');
+    	$port = $request -> input('port');
+    	$res = \DB::table('user') -> where('account', $account) -> update(array('port', $port));
+    	if($res){
+    		return 'true';
+    	}else{
+    		return 'false';
+    	}
     }
     //注册界面
     public function getRegister(){
