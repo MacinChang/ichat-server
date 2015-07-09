@@ -56,11 +56,7 @@ class UserController extends Controller {
     	$port = $request -> input('port');
     	//echo "$port";
     	$res = \DB::table('user') -> where('account', $account) -> update(array('port' => $port));
-    	if($res){
-    		return 'true';
-    	}else{
-    		return 'false';
-    	}
+    	return 'true';
     }
     //注册界面
     public function getRegister(){
