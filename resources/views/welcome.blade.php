@@ -2,11 +2,10 @@
 <html>
     <head>
         <title>注册成功</title>
-
-        
-
         <style>
             html, body {
+                background:url(../user/images/login/bg.jpg);
+                background-size:cover;
                 height: 100%;
             }
 
@@ -30,6 +29,7 @@
                 display: inline-block;
             }
             .head{
+                color: white;
                 font-family: "YaHei Consolas Hybrid";
             }
             .title {

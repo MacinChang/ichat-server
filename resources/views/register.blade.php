@@ -7,6 +7,7 @@
 
         <style>
             html, body {
+                background:url(../images/login/bg.jpg);
                 height: 100%;
             }
 

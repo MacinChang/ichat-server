@@ -1,11 +1,4 @@
-﻿/*********************************************
-Copyright：hubble;
-Author:moge;
-Date:2015-06-13
-Description:登录页面第一版的样式文件
-
-*********************************************/
- body{
+﻿body{
 	  background:url(../images/login/bg.jpg);
 	  background-size:cover;
 	  font-family: "Microsoft YaHei", "微软雅黑", "SimSun", "宋体";
