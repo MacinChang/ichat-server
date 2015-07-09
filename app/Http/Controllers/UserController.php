@@ -75,7 +75,8 @@ class UserController extends Controller {
 		while($res != NULL){
 			$account = rand(10001, 99999);
 			$res = \DB::table('user') -> where('account', $account) -> get();
-		}		$user = array('account' => $account, 'password' => $password, 'phone' => $phone, 'nickname' => $nick, 'level' => 1, 'signature' => 'default signature', 'gender' => 0, 'age' => 0);
+		}		
+		$user = array('account' => $account, 'password' => $password, 'phone' => $phone, 'nickname' => $nick, 'head' = 'null','level' => 1, 'signature' => 'default signature', 'gender' => 0, 'age' => 0);
 		\DB::table('user') -> insert($user);
 		\DB::table('user_class') -> insert(array('name' => 'my friends', 'account' => $account));
 		return view('welcome', ['account' => "$account"]);
