@@ -55,7 +55,7 @@ class UserController extends Controller {
     	$account = $request -> input('account');
     	$port = $request -> input('port');
     	echo "$port";
-    	$res = \DB::table('user') -> where('account', $account) -> update(array('port', $port));
+    	$res = \DB::table('user') -> where('account', $account) -> update(array('port' => $port));
     	if($res){
     		return 'true';
     	}else{
