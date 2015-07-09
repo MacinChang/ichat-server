@@ -32,7 +32,8 @@ class UserController extends Controller {
         $account = $request->input('account');
 		$password = $request->input('password');
 		//$ip = $_SERVER['REQUEST_URI'];
-		echo "{$_SERVER["REMOTE_ADDR"]}\n";
+		$ip = getenv('REMOTE_ADDR');
+		echo "{$_SERVER["REMOTE_ADDR"]}\n$ip\n";
 		//echo $ip;
 		//$password = $request->input('password');
 		$res = \DB::table('user') -> where('account', $account) -> get();
