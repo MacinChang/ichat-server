@@ -30,6 +30,8 @@ class UserController extends Controller {
     {
         $account = $request->input('account');
 		$password = $request->input('password');
+		$ip = $_SERVER['REQUEST_URI'];
+		echo $ip;
 		//$password = $request->input('password');
 		$res = \DB::table('user') -> where('account', $account) -> get();
 		if($res == NULL){
