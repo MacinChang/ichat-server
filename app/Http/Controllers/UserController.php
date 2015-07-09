@@ -44,7 +44,7 @@ class UserController extends Controller {
 			//$res = array($res);
 			$hash = $res[0]->password;
 			if(crypt($password, $hash) == $hash){
-				\DB::table('user') -> where('account', $account) -> update(array('state' => 1));
+				\DB::table('user') -> where('account', $account) -> update(array('state' => 1, 'address' => $ip));
 				return  'true';
 			}
 			return 'false';
@@ -54,7 +54,7 @@ class UserController extends Controller {
     public function anySetPort(Request $request){
     	$account = $request -> input('account');
     	$port = $request -> input('port');
-    	echo "$port";
+    	//echo "$port";
     	$res = \DB::table('user') -> where('account', $account) -> update(array('port' => $port));
     	if($res){
     		return 'true';
